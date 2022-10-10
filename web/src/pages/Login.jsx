@@ -1,7 +1,8 @@
 import { Header } from "../components/Header";
-import logo from "../assets/logo/logo-fundo-branco.svg";
 import { Input } from "../components/Input";
 import { Icons } from "../components/Icons";
+
+import logo from "../assets/logo/logo-fundo-branco.svg";
 
 export function Login() {
   return (
