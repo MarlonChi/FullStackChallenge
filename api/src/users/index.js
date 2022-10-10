@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient()
@@ -13,11 +14,45 @@ export const create = async (ctx) => {
     }
 
     try {
-        const {password, ...user} = await prisma.user.create({ data })
+        const { password, ...user } = await prisma.user.create({ data })
         ctx.body = user
         ctx.status = 201
     } catch (error) {
         ctx.body = error
         ctx.status = 500
     }
-} 
+}
+
+export const login = async ctx => {
+    const [type, token] = ctx.headers.authorization.split(" ")
+    const [email, plainTextPassword] = atob(token).split(":")
+
+    const user = await prisma.user.findUnique({
+        where: { email }
+    })
+
+    if (!user) {
+        ctx.status = 404
+        return
+    }
+
+    const passwordMatch = await bcrypt.compare(plainTextPassword, user.password)
+
+    if (!passwordMatch) {
+        ctx.status = 404
+        return
+    }
+
+    const { password, ...result } = user
+
+    const accessToken = jwt.sign({
+        id: user.id,
+        name: user.name,
+        expiresIn: "1d"
+    }, process.env.JWT_SECRET)
+
+    ctx.body = {
+        user: result,
+        accessToken
+    }
+}
