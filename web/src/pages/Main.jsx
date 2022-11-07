@@ -1,8 +1,16 @@
+import { Navigate } from "react-router-dom";
+import { useLocalStorage } from 'react-use';
 import imageCover from "../assets/imagem/img.png";
 import { Header } from "../components/Header";
 import logo from "../assets/logo/logo-fundo-vinho.svg";
 
 export function Main() {
+  const [auth] = useLocalStorage('auth', {})
+  
+  if(auth?.user?.id) {
+    return <Navigate to="/dashboard" replace={true} />
+  }
+
   return (
     <div className="h-screen bg-red-700 text-white p-4 flex flex-col items-center space-y-6">
       <Header variant={logo}/>

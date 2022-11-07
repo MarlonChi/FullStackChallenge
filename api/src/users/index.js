@@ -56,3 +56,27 @@ export const login = async ctx => {
         accessToken
     }
 }
+
+export const hints = async ctx => {
+    const username = ctx.request.params.username
+
+    const user = await prisma.user.findUnique({
+        where: { username }
+    })
+
+    if (!user) {
+        ctx.status = 404
+        return
+    }
+
+    const hints = await prisma.hunch.findMany({
+        where: {
+            userId: user.id
+        }
+    })
+
+    ctx.body = {
+        name: user.name,
+        hints
+    }
+}

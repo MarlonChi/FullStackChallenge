@@ -1,4 +1,6 @@
-import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useLocalStorage } from 'react-use';
+
 import { Dashboard } from "../pages/Dashboard";
 import { Login } from "../pages/Login";
 import { Main } from "../pages/Main";
@@ -23,11 +25,13 @@ const router = createBrowserRouter([
         element: <Dashboard />
     },
     {
-        path: '/profile',
+        path: '/:username',
         element: <Profile />
     },
 ]);
 
-export const Router = () => (
-  <RouterProvider router={router} />
-)
+export const Router = () => {
+    return (
+        <RouterProvider router={router} />
+    )
+}

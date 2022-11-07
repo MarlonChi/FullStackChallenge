@@ -12,3 +12,5 @@ router.post('/users', users.create);
 router.post('/hints', hints.create);
 
 router.get('/games', games.list);
+
+router.post('/:username', users.hints);

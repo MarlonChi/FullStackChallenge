@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useLocalStorage } from 'react-use';
+import { Navigate } from "react-router-dom";
 
 import { Header } from "../components/Header";
 import { Input } from "../components/Input";
@@ -19,11 +21,12 @@ const validationSchema = yup.object().shape({
 });
 
 export function Register() {
+  const [auth] = useLocalStorage('auth', {})
   const formik = useFormik({
     onSubmit: async (values) => {
       await axios({
         method: 'post',
-        baseURL: 'http://localhost:3000',
+        baseURL: import.meta.env.VITE_API_URL,
         url: '/users',
         data: values
       })
@@ -37,6 +40,10 @@ export function Register() {
     },
     validationSchema,
   });
+
+  if(auth?.user?.id) {
+    return <Navigate to="/dashboard" replace={true} />
+  }
 
   return (
     <>
@@ -100,7 +107,7 @@ export function Register() {
             className="block w-full text-white bg-red-500 px-6 py-3 rounded-xl text-center disabled:opacity-50 disabled:bg-gray-500"
             disabled={!formik.isValid}
           >
-            Criar minha conta
+            {formik.isSubmitting ? 'Carregando...' : 'Criar minha conta'}
           </button>
         </form>
       </main>
