@@ -42,7 +42,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 Baixe o repositório com git clone e entre na pasta do projeto.<br/>
 Renomeie os arquivos _.env.example_ para _.env_ e informe as URLs e o JWT secret. É necessário ter um login no __PlanetScale__ para configurar as credenciais no arquivo _.env_ do código.<br/>
 ```bash
-$ git clone https://github.com/rmatos10/natrave
+$ git clone https://github.com/MarlonChi/FullStackChallenge
 ```
 * Back-end
 ```bash
@@ -70,5 +70,5 @@ Esse projeto está sob a [licença MIT](LICENSE).
 
 ## :email: Contato
 
-E-mail: [**rafael.matosr@gmail.com**](mailto:rafael.matosr@gmail.com)
+E-mail: [**marlonchiodelli@hotmail.com**](mailto:marlonchiodelli@hotmail.com)
 ---
