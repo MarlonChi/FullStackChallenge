@@ -20,7 +20,7 @@ Foram 5 dias de aula, totalizando um pouco mais de 10 horas de vídeo, desenvolv
 <br>
 
 <p align="center">
-  <img alt="photo" src=".github/NaTrave.png" width="100%">
+  <img alt="photo" src=".github/NaTrave.PNG" width="100%">
 </p>
 
 ## 🚀 Tecnologias
